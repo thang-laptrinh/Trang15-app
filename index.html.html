@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Thùy Trang ơi 💌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@500;700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #FBF1E7;
+    --paper: #FFF8F0;
+    --plum: #4B2E39;
+    --rose: #D8718B;
+    --rose-dark: #C2526F;
+    --coral: #E8916F;
+    --sage: #8FA37E;
+    --gold: #C9A227;
+    --shadow: rgba(75,46,57,0.18);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html,body{
+    margin:0;
+    min-height:100%;
+    background: var(--cream);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--plum);
+    overflow-x:hidden;
+  }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding: 24px 16px;
+    position:relative;
+  }
+
+  /* ambient floating hearts, restrained */
+  .float{
+    position:fixed;
+    top:100%;
+    font-size: clamp(14px, 3vw, 22px);
+    opacity:0.35;
+    color: var(--rose);
+    pointer-events:none;
+    animation: rise linear infinite;
+    z-index:0;
+  }
+  @keyframes rise{
+    0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.35; }
+    90%{ opacity:0.25; }
+    100%{ transform: translateY(-110vh) translateX(var(--drift,20px)) rotate(25deg); opacity:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .float{ animation: none; display:none; }
+  }
+
+  .card{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width: 460px;
+    background: var(--paper);
+    border-radius: 22px;
+    padding: clamp(28px, 6vw, 44px) clamp(22px, 6vw, 36px) 34px;
+    box-shadow: 0 24px 60px var(--shadow);
+    border: 1px solid #EFE0D2;
+    transform: rotate(-0.6deg);
+  }
+
+  .seal{
+    position:absolute;
+    top:-18px;
+    left: 28px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--gold);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    box-shadow: 0 6px 14px rgba(201,162,39,0.45);
+    transform: rotate(-8deg);
+  }
+
+  .eyebrow{
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--coral);
+    font-weight:600;
+    margin: 6px 0 10px;
+  }
+
+  h1{
+    font-family:'Mali', cursive;
+    font-weight:700;
+    font-size: clamp(28px, 7vw, 38px);
+    margin: 0 0 14px;
+    color: var(--rose-dark);
+    line-height:1.15;
+  }
+
+  p.msg{
+    font-size: clamp(16px, 4vw, 18px);
+    line-height:1.6;
+    margin: 0 0 28px;
+    color: var(--plum);
+  }
+
+  p.msg strong{ color: var(--rose-dark); }
+
+  .stage{
+    position:relative;
+    min-height: 150px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    margin-bottom: 18px;
+  }
+
+  .btn{
+    font-family:'Be Vietnam Pro', sans-serif;
+    border:none;
+    border-radius: 999px;
+    cursor:pointer;
+    font-weight:700;
+    font-size: 16px;
+    padding: 14px 26px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.4s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn:focus-visible{
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  #btnYes{
+    background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(216,113,139,0.4);
+    position:relative;
+    z-index:2;
+    margin-top: 4px;
+  }
+  #btnYes:hover{ transform: scale(1.04); }
+  #btnYes:active{ transform: scale(0.98); }
+
+  #btnNo{
+    background: #F1E4D6;
+    color: var(--plum);
+    box-shadow: 0 6px 14px rgba(75,46,57,0.12);
+    position:absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(40px);
+    z-index:3;
+  }
+
+  #btnNo.poof{
+    animation: poof 0.55s forwards;
+  }
+  @keyframes poof{
+    0%{ opacity:1; transform: translateX(var(--poof-x,0)) translateY(var(--poof-y,0)) scale(1) rotate(0deg); }
+    100%{ opacity:0; transform: translateX(var(--poof-x,0)) translateY(calc(var(--poof-y,0) - 30px)) scale(0.3) rotate(35deg); }
+  }
+
+  .hint{
+    text-align:center;
+    font-size: 14px;
+    color: #8A6B72;
+    min-height: 20px;
+    transition: opacity 0.2s ease;
+  }
+
+  .gone-note{
+    text-align:center;
+    font-size: 13.5px;
+    color: var(--coral);
+    font-weight:600;
+    margin-top: -4px;
+  }
+
+  /* ---- screen 2 : date picking ---- */
+  #screenYes{ display:none; }
+
+  .yes-banner{
+    font-family:'Mali', cursive;
+    font-size: clamp(24px, 6vw, 30px);
+    color: var(--rose-dark);
+    margin: 0 0 8px;
+    text-align:center;
+  }
+
+  .yes-sub{
+    text-align:center;
+    font-size:15px;
+    margin: 0 0 22px;
+    color: var(--plum);
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    margin-bottom: 16px;
+  }
+
+  .chip{
+    border:1.5px solid var(--sage);
+    background: #fff;
+    color: var(--sage);
+    font-family:'Be Vietnam Pro', sans-serif;
+    font-weight:600;
+    font-size: 13.5px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    cursor:pointer;
+    transition: all 0.15s ease;
+  }
+  .chip:hover{ background: var(--sage); color:#fff; }
+  .chip.active{ background: var(--sage); color:#fff; }
+
+  .date-row{
+    display:flex;
+    justify-content:center;
+    margin-bottom: 22px;
+  }
+
+  input[type="date"]{
+    font-family:'Be Vietnam Pro', sans-serif;
+    font-size:15px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1.5px solid #E0CFC0;
+    background:#fff;
+    color: var(--plum);
+  }
+
+  #btnConfirm{
+    display:block;
+    margin: 0 auto;
+    background: linear-gradient(135deg, var(--sage), #6F8A5E);
+    color:#fff;
+    box-shadow: 0 10px 22px rgba(143,163,126,0.4);
+  }
+  #btnConfirm:hover{ transform: scale(1.03); }
+
+  #btnShare{
+    display:none;
+    width: fit-content;
+    margin: 16px auto 0;
+    background: linear-gradient(135deg, var(--coral), var(--rose-dark));
+    color:#fff;
+    text-decoration:none;
+    text-align:center;
+    box-shadow: 0 10px 22px rgba(232,145,111,0.4);
+  }
+  #btnShare:hover{ transform: scale(1.03); }
+
+  #confirmNote{
+    text-align:center;
+    margin-top: 18px;
+    font-size: 15px;
+    color: var(--rose-dark);
+    font-weight:600;
+    display:none;
+  }
+
+  .footer-note{
+    text-align:center;
+    font-size: 11.5px;
+    color: #B79A8C;
+    margin-top: 22px;
+  }
+
+  @media (max-width: 380px){
+    #btnNo{ position: static; transform:none; display:block; margin: 10px auto 0; }
+    .stage{ flex-direction:column; align-items:center; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <div class="seal">💌</div>
+  <div class="eyebrow">Một lời thú nhận nhỏ</div>
+
+  <div id="screenAsk">
+    <h1>Mắm ơi,</h1>
+    <p class="msg">Tui muốn đi chơi với mình lúc về, <strong>mình đồng ý nhá!</strong></p>
+
+    <div class="stage" id="stage">
+      <button class="btn" id="btnYes" onclick="sayYes()">Đồng ý 💗</button>
+      <button class="btn" id="btnNo" onmouseenter="dodge(event)" onclick="clickNo(event)" ontouchstart="touchDodge(event)">Không</button>
+    </div>
+
+    <div class="hint" id="hint">Thử bấm "Không" xem Mắm né được không nè 😏</div>
+    <div class="gone-note" id="goneNote" style="display:none;">Không đã bỏ chạy mất rồi, giờ chỉ còn Đồng ý thôi 😆</div>
+  </div>
+
+  <div id="screenYes">
+    <div class="yes-banner">Yayyy! Mắm đồng ý rồi</div>
+    <p class="yes-sub">Vậy Mắm chọn ngày đi chơi nha, chọn nhanh kẻo tui hồi hộp quá 🥰</p>
+
+    <div class="chips">
+      <button class="chip" data-chip="weekend">Cuối tuần này 🌈</button>
+      <button class="chip" data-chip="custom">Để Mắm chọn ngày 📅</button>
+    </div>
+
+    <div class="date-row">
+      <input type="date" id="dateInput">
+    </div>
+
+    <button class="btn" id="btnConfirm" onclick="confirmDate()">Chốt lịch hẹn 💌</button>
+    <div id="confirmNote"></div>
+    <a class="btn" id="btnShare" href="https://m.me/nguyen.nam.thang.125124" target="_blank" rel="noopener" onclick="copyShareMessage()">Mở Messenger gửi cho người yêu 💌</a>
+  </div>
+
+  <div class="footer-note">made with 💗 for Mắm — aka Thùy Trang</div>
+</div>
+
+<script>
+  // ambient floating hearts
+  (function(){
+    const symbols = ['💗','💕','🌸','💌'];
+    const count = 7;
+    for(let i=0;i<count;i++){
+      const el = document.createElement('div');
+      el.className = 'float';
+      el.textContent = symbols[i % symbols.length];
+      el.style.left = (Math.random()*100) + 'vw';
+      el.style.setProperty('--drift', (Math.random()*60-30)+'px');
+      el.style.animationDuration = (9 + Math.random()*8) + 's';
+      el.style.animationDelay = (Math.random()*10) + 's';
+      document.body.appendChild(el);
+    }
+  })();
+
+  let noClicks = 0;
+  const maxClicks = 5;
+  const stage = document.getElementById('stage');
+  const btnNo = document.getElementById('btnNo');
+  const btnYes = document.getElementById('btnYes');
+  const hint = document.getElementById('hint');
+  const goneNote = document.getElementById('goneNote');
+
+  const messages = [
+    'Thử bấm "Không" xem Mắm né được không nè 😏',
+    'Hửm, Mắm bấm trúng rồi à? Để tui chạy xa hơn chút 🏃',
+    'Càng bấm Không, tui càng thích Mắm hơn đó 💕',
+    'Mắm ơi sao cứ bấm Không vậy =))',
+    'Sắp hết đường chạy rồi nè, Mắm...',
+    'Không đã bỏ chạy mất rồi, giờ Mắm chỉ còn Đồng ý thôi 😆'
+  ];
+
+  function randomPositionWithin(){
+    const rect = stage.getBoundingClientRect();
+    const btnRect = btnNo.getBoundingClientRect();
+    const maxLeft = Math.max(rect.width - btnRect.width - 8, 8);
+    const maxTop = Math.max(rect.height - btnRect.height - 8, 8);
+    const left = Math.random() * maxLeft;
+    const top = Math.random() * maxTop;
+    return {left, top};
+  }
+
+  function dodge(){
+    if(noClicks >= maxClicks) return;
+    if(window.innerWidth <= 380) return; // static layout on very small screens
+    const pos = randomPositionWithin();
+    btnNo.style.position = 'absolute';
+    btnNo.style.left = pos.left + 'px';
+    btnNo.style.top = pos.top + 'px';
+    btnNo.style.transform = 'none';
+  }
+
+  function touchDodge(e){
+    // on touch, dodge most of the time so it still feels "hard to catch"
+    if(noClicks >= maxClicks) return;
+    if(Math.random() < 0.75){
+      e.preventDefault();
+      dodge();
+    }
+  }
+
+  function clickNo(e){
+    if(noClicks >= maxClicks) return;
+    noClicks++;
+
+    const scale = 1 + noClicks * 0.18;
+    btnYes.style.transform = `scale(${scale})`;
+
+    hint.style.opacity = 0;
+    setTimeout(()=>{
+      hint.textContent = messages[Math.min(noClicks, messages.length-1)];
+      hint.style.opacity = 1;
+    }, 150);
+
+    if(noClicks >= maxClicks){
+      const rect = btnNo.getBoundingClientRect();
+      btnNo.style.setProperty('--poof-x', '0px');
+      btnNo.style.setProperty('--poof-y', '0px');
+      btnNo.classList.add('poof');
+      setTimeout(()=>{
+        btnNo.style.display = 'none';
+        goneNote.style.display = 'block';
+      }, 550);
+    } else {
+      dodge();
+    }
+  }
+
+  function sayYes(){
+    document.getElementById('screenAsk').style.display = 'none';
+    document.getElementById('screenYes').style.display = 'block';
+  }
+
+  // date chips logic
+  const chips = document.querySelectorAll('.chip');
+  const dateInput = document.getElementById('dateInput');
+
+  function formatDateVN(d){
+    const days = ['Chủ Nhật','Thứ Hai','Thứ Ba','Thứ Tư','Thứ Năm','Thứ Sáu','Thứ Bảy'];
+    return `${days[d.getDay()]}, ngày ${d.getDate()} tháng ${d.getMonth()+1}`;
+  }
+
+  chips.forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      chips.forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      const today = new Date();
+      let target = new Date(today);
+
+      if(chip.dataset.chip === 'weekend'){
+        const day = today.getDay();
+        const daysToSat = (6 - day + 7) % 7 || 7;
+        target.setDate(today.getDate() + daysToSat);
+      } else {
+        dateInput.focus();
+        return;
+      }
+
+      const yyyy = target.getFullYear();
+      const mm = String(target.getMonth()+1).padStart(2,'0');
+      const dd = String(target.getDate()).padStart(2,'0');
+      dateInput.value = `${yyyy}-${mm}-${dd}`;
+    });
+  });
+
+  dateInput.min = new Date().toISOString().split('T')[0];
+
+  let shareMessage = '';
+  const btnShare = document.getElementById('btnShare');
+
+  function confirmDate(){
+    const note = document.getElementById('confirmNote');
+    if(!dateInput.value){
+      note.style.color = '#C2526F';
+      note.textContent = 'Mắm chọn ngày giúp tui nha 🥹';
+      note.style.display = 'block';
+      btnShare.style.display = 'none';
+      return;
+    }
+    const d = new Date(dateInput.value + 'T00:00:00');
+    note.style.color = '';
+    note.textContent = `Hẹn gặp Mắm vào ${formatDateVN(d)} nha, tui đợi sẵn rồi đó 🥰💗`;
+    note.style.display = 'block';
+
+    shareMessage = `Mắm chọn ngày đi chơi rồi nè: ${formatDateVN(d)} 💕 (gửi từ trang tỏ tình của anh đó 😆)`;
+    btnShare.style.display = 'block';
+  }
+
+  function copyShareMessage(){
+    try{
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(shareMessage).catch(()=>{});
+      }
+    }catch(err){}
+  }
+</script>
+
+</body>
+</html>
